@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Fara Ethereal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <!-- My Css -->
     <link rel="stylesheet" href="css/style.css">
   </head>
-  <body>
+  <body id="home">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark shadow" style ="background-color: #E9967A">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark shadow" style ="background-color: #E9967A">
       <div class="container">
         <a class="navbar-brand" href="#">Fara Ethereal</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,16 +20,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="#home">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Abouts</a>
+              <a class="nav-link" href="#about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Projects</a>
+              <a class="nav-link" href="#projects">Projects</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact Me</a>
+              <a class="nav-link" href="#contact">Contact Us</a>
             </li>
           </ul>
         </div>
@@ -67,8 +68,8 @@
     <!-- Ny projects -->
     <section id="projects">
       <div class="container mb-2" style="background-color: #ffe4c4">
-        <div class="row text-center">
-          <div class="col mb-2 mt-5">
+        <div class="row text-center mb-3">
+          <div class="col">
             <h2>Projects</h2>
           </div>
         </div>
@@ -116,6 +117,74 @@
       </div>
     </section>
     <!-- Ny projects end -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+    <!-- Contact us -->
+    <section id="contact">
+      <div class="container">
+        <div class="row text-center mb-3">
+          <div class="col">
+            <h2>Contact Us</h2>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-6 mb-3">
+            <div class="info">
+              <div class="info-item d-flex">
+                <i class="bi bi-geo-alt-fill"></i>
+                <div>
+                  <h4>Lokasi:</h4>
+                  <p>Jl. Gatot Koco Gg. VIII/14A Kolpajung Pamekasan, Madura Jawa Timur</p>
+                </div>
+              </div>
+              <div class="info-item d-flex">
+                <i class="bi bi-instagram"></i>
+                <div>
+                  <h4>Instagram:</h4>
+                  <p>@faraethereal</p>
+                </div>
+              </div>
+              <div class="info-item d-flex">
+                <i class="bi bi-phone"></i>
+                <div>
+                  <h4>Phone</h4>
+                  <p>+62 8133 4814 156</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+          <form>
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" aria-describedby="name">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" aria-describedby="email">
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea class="form-control" id="message" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact us end -->
+
+    <!-- Footer -->
+    <footer class ="text-center text-white pb-3" style ="background-color: #E9967A">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-sm-12">
+            <p>&copy; copyright <?php echo date("Y");?> | built with <i class="bi bi-suit-heart-fill text-danger"></i> by. <a href="https://github.com/MNasirulUmam">M. Nasirul Umam</a>.</p>
+          </div>
+        </div>
+    </footer>
+    <!-- Footer us -->
   </body>
 </html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script type="text/JavaScript"> var theDate=new Date() document.write(theDate.getFullYear()) </script>
