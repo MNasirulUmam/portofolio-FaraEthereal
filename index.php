@@ -22,7 +22,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#home">Home</a>
+              <a class="nav-link" aria-current="page" href="#home">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#about">About</a>
@@ -40,7 +40,7 @@
     <!-- Navbar end -->
     <!-- Jumbotron -->
     <section class="jumbotron text-center">
-      <img src="img/logo.png" alt="Fara Ethereal" width="200">
+      <img src="img/logo.jpg" alt="Fara Ethereal" width="200">
       <h1 class="display-4">Fara Ethereal</h1>
       <p class="lead">Event Organizer</p>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffff" fill-opacity="1" d="M0,128L48,160C96,192,192,256,288,250.7C384,245,480,171,576,122.7C672,75,768,53,864,85.3C960,117,1056,203,1152,240C1248,277,1344,267,1392,261.3L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>      
