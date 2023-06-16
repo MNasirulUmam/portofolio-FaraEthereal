@@ -19,7 +19,7 @@ session_start();
         }else if($username == $_POST['username'] && $password == $_POST['password']){
            $_SESSION["name"] = $_POST['username'];
            $_SESSION["username"] = true;
-           header("Location:home.php");
+           header("Location:layouts/home.php");
            
         }
     }
