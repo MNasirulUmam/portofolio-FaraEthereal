@@ -3,7 +3,7 @@
     session_start();
     
     $username = $_POST['username']; 
-    $password = $_POST['password'];
+    $password = md5($_POST['password']);
 
     $query = "SELECT username, password from users WHERE username = '$username' and password = '$password'";
     $result = mysqli_query($koneksi, $query);
