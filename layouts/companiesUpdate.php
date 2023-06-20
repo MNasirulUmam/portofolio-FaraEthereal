@@ -141,14 +141,14 @@
                     <!-- Froms Input -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Crate Company</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Update Company</h6>
                         </div>
                         <div class="card-body">
                             <?php if(isset($_POST["simpan"])){ ?>
                                 <?php if ($uploadOk == 1 || $uploadOk == 6) { ?>
                                     <div class="alert alert-success" role="alert"> <?php echo $hasil;?></div>
                                 <?php }else{ ?>
-                                    <div class="alert alert-success" role="danger"> <?php echo $hasil;?></div>
+                                    <div class="alert alert-danger" role="danger"> <?php echo $hasil;?></div>
                                 <?php } ?> 
                             <?php } ?>   
                             <form action="http://localhost/portofolio/layouts/companiesUpdate.php" method="post" enctype="multipart/form-data">

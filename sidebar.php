@@ -37,7 +37,7 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Companies:</h6>
-            <a class="collapse-item" href="companiesCreate.php">Create Companies</a>
+            <a class="collapse-item" href="companiesUpdate.php">Update Companies</a>
         </div>
     </div>
 </li>
@@ -53,7 +53,7 @@
         data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">abouts Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Create abouts</a>
+            <a class="collapse-item" href="abouts.php">abouts</a>
             <!-- <a class="collapse-item" href="utilities-border.html">Borders</a>
             <a class="collapse-item" href="utilities-animation.html">Animations</a>
             <a class="collapse-item" href="utilities-other.html">Other</a> -->

@@ -1,3 +1,53 @@
+<?php 
+    session_start();
+    if ($_SESSION['username'] == false){
+        header('Location:../login.php');
+    }
+    require_once 'init.php';
+
+    //$name = $_SESSION['name'];
+    
+    $queryAbouts ="SELECT * FROM abouts";
+    $resultAbouts = mysqli_query($koneksi,$queryAbouts);
+    $data = mysqli_fetch_array($resultAbouts);
+    // var_dump($data);
+    // die;   
+    if(isset($_POST["simpan"])) { 
+        $title      = $_POST["title"];
+        $description= $_POST["description"];
+        $id         = $_POST["id"];
+        if(empty($title) && empty($description)) {
+            $erros = "data harus di isi";
+            // var_dump($erros);
+        }else {
+            if(empty($id)){
+                $queryInsert = "INSERT INTO abouts (title,description) VALUES ('$title','$description')";
+                $insert = mysqli_query($koneksi,$queryInsert);
+                if($insert){
+                    $uploadOk = 1;
+                    $hasil = "Abaouts successfully uploaded";
+                }else{
+                    $uploadOk = 0;
+                    $hasil = "Abaouts fail uploaded";   
+                }
+            }else{
+                $queryUpdate = "UPDATE abouts SET title='$title', description ='$description'  WHERE id = '$id'";
+                $insert = mysqli_query($koneksi,$queryUpdate);
+                if($insert){
+                    $uploadOk = 2;
+                    $hasil = "Abaouts successfully uploaded";
+                }else{
+                    $uploadOk = 0;
+                    $hasil = "Abaouts fail uploaded";   
+                }
+            }
+        }
+        // var_dump($title);
+        //$id      = $_SESSION['id'];
+
+        
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +59,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Abouts</title>
+    <title>Companies</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -38,14 +88,46 @@
                 <div class="container-fluid">
                 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Abouts</h1>
+                    <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Create Companies</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                    </div>
+                    </div> -->
 
                     <!-- Content Row -->
-                    <div class="row">
+                    <!-- <div class="row">
 
+                    </div> -->
+                    <!-- Froms Input -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Abouts</h6>
+                        </div>
+                        <div class="card-body">
+                            <?php if(isset($_POST["simpan"])){ ?>
+                                <?php if(!empty($erros)){?>
+                                    <div class="alert alert-danger" role="danger"> <?php echo $erros ?> </div>
+                                <?php } else { ?>
+                                    <?php if ($uploadOk == 1 || $uploadOk == 2) { ?>
+                                        <div class="alert alert-success" role="alert"> <?php echo $hasil;?></div>
+                                    <?php }else{ ?>
+                                        <div class="alert alert-danger" role="danger"> <?php echo $hasil;?></div>
+                                    <?php } ?>
+                                <?php } ?>
+                            <?php } ?>   
+                            <form action="http://localhost/portofolio/layouts/abouts.php" method="post">
+                                <div class="mb-3">
+                                    <label class="form-label">Title</label>
+                                    <input type="text" class="form-control" name="title" id="" value="<?php if(isset($data['title'])) {echo $data['title'];}?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Description</label>
+                                    <textarea type="text" class="form-control" name="description" id=""><?php if(isset($data['description'])) {echo $data['description'];}?></textarea>
+                                </div>
+                                <input type="hidden" name="id" value="<?php if(!empty($data['id'])) {echo $data['id'];}?>">
+                                <input type="submit" name="simpan" class="btn btn-primary"></input>
+                                <a href="<?php $_SERVER['PHP_SELF']; ?>" class="btn btn-secondary">Refresh</a>
+                            </form>
+                        </div>
                     </div>
 
                 </div>
