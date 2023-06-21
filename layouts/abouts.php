@@ -117,11 +117,11 @@
                             <form action="http://localhost/portofolio/layouts/abouts.php" method="post">
                                 <div class="mb-3">
                                     <label class="form-label">Title</label>
-                                    <input type="text" class="form-control" name="title" id="" value="<?php if(isset($data['title'])) {echo $data['title'];}?>">
+                                    <input type="text" class="form-control" name="title" id="" value="<?php if(!empty($data['title'])) {echo $data['title'];}?>">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Description</label>
-                                    <textarea type="text" class="form-control" name="description" id=""><?php if(isset($data['description'])) {echo $data['description'];}?></textarea>
+                                    <textarea type="text" class="form-control" name="description" id=""><?php if(!empty($data['description'])) {echo $data['description'];}?></textarea>
                                 </div>
                                 <input type="hidden" name="id" value="<?php if(!empty($data['id'])) {echo $data['id'];}?>">
                                 <input type="submit" name="simpan" class="btn btn-primary"></input>

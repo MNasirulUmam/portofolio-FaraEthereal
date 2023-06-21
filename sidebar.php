@@ -84,9 +84,10 @@
     </div>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="contacts.php">
         <i class="fas fa-fw fa-info"></i>
-        <span>Contacts</span></a>
+        <span>Contacts</span>
+    </a>
 </li>
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">

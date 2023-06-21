@@ -183,6 +183,7 @@
                                     <label class="form-check-label">Check me out</label>
                                 </div>
                                 <input type="submit" name="simpan" class="btn btn-primary"></input>
+                                <a href="<?php $_SERVER['PHP_SELF']; ?>" class="btn btn-secondary">Refresh</a>
                             </form>
                         </div>
                     </div>
