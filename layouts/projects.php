@@ -146,18 +146,18 @@
                     <!-- DataTales -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Projects</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Projects</h6>
                             <!-- Button trigger modal -->
                         </div>  
                         <button type="button" class="btn btn-primary btn-xs ml-auto mr-5 mt-3" data-toggle="modal" data-target="#exampleModal">
-                        Tambah Data
+                        Create Data
                         </button>
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Modal Projects</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                             </button>
@@ -209,7 +209,7 @@
                                             <th>Name</th>
                                             <th>Description</th>
                                             <th>Image</th>
-                                            <th>Aksi</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -218,7 +218,7 @@
                                             <th>Name</th>
                                             <th>Description</th>
                                             <th>Image</th>
-                                            <th>Aksi</th>
+                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -231,11 +231,10 @@
                                                 echo "<td>{$datas['description']}</td>";?>
                                                 <td><img src ="http://localhost/portofolio/img/<?php echo $datas['image']?>" width = 100></td>
                                                 <?php echo "<td>";?>
-                                                    <a class="btn btn-info" href="http://localhost/portofolio/layouts/projectsUpdate.php/<?php echo $datas['id'];?>">Edit</a>
-                                                    
+                                                    <a class="btn btn-info" href="http://localhost/portofolio/layouts/projectsUpdate.php/<?php echo $datas['id'];?>">Update</a>
                                                     <form onsubmit="return confirm('Apakah yaknik mau dihapus?')" method="post" action="http://localhost/portofolio/layouts/projects.php">
                                                         <input type="hidden" name="id" value="<?php echo $datas['id'];?>">
-                                                        <input type="submit" name="hapus" value= "Hapus" class="btn btn-danger">
+                                                        <input type="submit" name="hapus" value= "Delate" class="btn btn-danger">
                                                     </form>
                                                     </td>
                                             <?php echo "</tr>";

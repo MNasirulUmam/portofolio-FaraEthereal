@@ -133,7 +133,7 @@
                     <!-- Froms Input -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Update Company</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Update Projects</h6>
                         </div>
                         <div class="card-body">
                             <?php if(isset($_POST["simpan"])){ ?>
@@ -149,7 +149,7 @@
                                     <input type="text" class="form-control" name="name" id="" value="<?php echo $data['name']?>">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Address</label>
+                                    <label class="form-label">Description</label>
                                     <textarea type="text" class="form-control" name="description" id=""><?php echo $data['description']?></textarea>
                                 </div>
                                 <div class="mb-3">

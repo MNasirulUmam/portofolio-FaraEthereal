@@ -1,3 +1,26 @@
+<?php 
+    session_start();
+    if ($_SESSION['username'] == false){
+        header('Location:../login.php');
+    }
+    require_once 'init.php';
+
+    $queryCompanies ="SELECT * FROM companies";
+    $resultCompanies = mysqli_query($koneksi,$queryCompanies);
+    $dataCompanies = mysqli_fetch_array($resultCompanies);
+    
+    $queryAbouts ="SELECT * FROM abouts";
+    $resultAbouts = mysqli_query($koneksi,$queryAbouts);
+    $dataAbouts = mysqli_fetch_array($resultAbouts);
+
+    $queryProjets ="SELECT * FROM projects";
+    $dataProjets = mysqli_query($koneksi,$queryProjets);
+
+    $queryContacts ="SELECT *,contacts.id as id_contacts FROM contacts join companies on contacts.company_id = companies.id order by contacts.id asc";
+    $resultContacts = mysqli_query($koneksi,$queryContacts);
+    $dataContacts = mysqli_fetch_array($resultContacts);
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,6 +68,59 @@
 
                     <!-- Content Row -->
                     <div class="row">
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Earnings (Monthly)</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Earnings (Annual)</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Pending Requests</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
 

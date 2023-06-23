@@ -100,7 +100,8 @@
                   <div class="card">
                       <img src="img/<?php echo $datas['image']?>" class="card-img-top" alt="SC4a">
                       <div class="card-body">
-                          <p class="card-text"><?php echo $datas['description']?></p>
+                        <h2><?php echo $datas['name']?></h2>
+                        <p class="card-text"><?php echo $datas['description']?></p>
                       </div>
                   </div>
               </div>
@@ -132,7 +133,7 @@
                 <i class="bi bi-instagram"></i>
                 <div>
                   <h4>Instagram:</h4>
-                  <p><?php echo $dataCompanies['sosial']?></p>
+                  <p><a href="https://www.instagram.com/faraethereal/"><?php echo $dataCompanies['sosial']?></a></p>
                 </div>
               </div>
               <div class="info-item d-flex">
