@@ -37,7 +37,7 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Companies:</h6>
-            <a class="collapse-item" href="companiesUpdate.php">Update Companies</a>
+            <a class="collapse-item" href="http://localhost/portofolio/layouts/companiesUpdate.php">Update Companies</a>
         </div>
     </div>
 </li>
@@ -53,7 +53,7 @@
         data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">abouts Utilities:</h6>
-            <a class="collapse-item" href="abouts.php">abouts</a>
+            <a class="collapse-item" href="http://localhost/portofolio/layouts/abouts.php">abouts</a>
             <!-- <a class="collapse-item" href="utilities-border.html">Borders</a>
             <a class="collapse-item" href="utilities-animation.html">Animations</a>
             <a class="collapse-item" href="utilities-other.html">Other</a> -->
@@ -79,12 +79,12 @@
     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Contacts Projects:</h6>
-            <a class="collapse-item" href="projects.php">Create Projects</a>
+            <a class="collapse-item" href="http://localhost/portofolio/layouts/projects.php">Create Projects</a>
         </div>
     </div>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="contacts.php">
+    <a class="nav-link" href="http://localhost/portofolio/layouts/contacts.php">
         <i class="fas fa-fw fa-info"></i>
         <span>Contacts</span>
     </a>

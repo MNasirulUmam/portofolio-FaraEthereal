@@ -1,3 +1,22 @@
+<?php 
+    include "Koneksi.php";
+
+    $queryCompanies ="SELECT * FROM companies";
+    $resultCompanies = mysqli_query($koneksi,$queryCompanies);
+    $dataCompanies = mysqli_fetch_array($resultCompanies);
+    
+    $queryAbouts ="SELECT * FROM abouts";
+    $resultAbouts = mysqli_query($koneksi,$queryAbouts);
+    $dataAbouts = mysqli_fetch_array($resultAbouts);
+
+    $queryProjets ="SELECT * FROM projects";
+    $dataProjets = mysqli_query($koneksi,$queryProjets);
+
+    $queryContacts ="SELECT *,contacts.id as id_contacts FROM contacts join companies on contacts.company_id = companies.id order by contacts.id asc";
+    $resultContacts = mysqli_query($koneksi,$queryContacts);
+    $dataContacts = mysqli_fetch_array($resultContacts);
+    
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -15,7 +34,7 @@
     <!-- Navbar -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark shadow" style ="background-color: #E9967A">
       <div class="container">
-        <a class="navbar-brand" href="#">Fara Ethereal</a>
+        <a class="navbar-brand" href="index.php"><?php echo $dataCompanies['name']?></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -40,9 +59,9 @@
     <!-- Navbar end -->
     <!-- Jumbotron -->
     <section class="jumbotron text-center">
-      <img src="img/logo.jpg" alt="Fara Ethereal" width="200">
-      <h1 class="display-4">Fara Ethereal</h1>
-      <p class="lead">Event Organizer</p>
+      <img src="img/<?php echo $dataCompanies['logo']?>" alt="Fara Ethereal" width="200">
+      <h1 class="display-4"><?php echo $dataCompanies['name']?></h1>
+      <p class="lead"><?php echo $dataCompanies['tagline']?></p>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffff" fill-opacity="1" d="M0,128L48,160C96,192,192,256,288,250.7C384,245,480,171,576,122.7C672,75,768,53,864,85.3C960,117,1056,203,1152,240C1248,277,1344,267,1392,261.3L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>      
     </section>
     <!-- Jumbotron end -->
@@ -50,17 +69,17 @@
     <section id ="about">
       <div class="container text-center mb-3">
         <div class="row mt-5 mb-2">
-          <h2>About Me</h2>
+          <h2>Abouts</h2>
         </div>
         <div class="row justify-content-center fs-5">
-          <div class="col-md-4">
+          <div class="col-md-10">
+            <h3><?php echo $dataAbouts['title']?></h3>
+            <?php echo $dataAbouts['description']?>
+          </div>
+          <!-- <div class="col-md-4">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique veritatis dolorem animi itaque, 
               porro reiciendis deserunt ullam atque veniam impedit cupiditate accusantium numquam suscipit mollitia placeat voluptate, officia eaque assumenda.
-          </div>
-          <div class="col-md-4">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique veritatis dolorem animi itaque, 
-              porro reiciendis deserunt ullam atque veniam impedit cupiditate accusantium numquam suscipit mollitia placeat voluptate, officia eaque assumenda.
-          </div>
+          </div> -->
         </div>
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffe4c4" fill-opacity="1" d="M0,128L48,160C96,192,192,256,288,250.7C384,245,480,171,576,122.7C672,75,768,53,864,85.3C960,117,1056,203,1152,240C1248,277,1344,267,1392,261.3L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
@@ -76,45 +95,16 @@
           </div>
         </div>
        <div class="row justify-content-center">
-          <div class="col-md-4 mb-3">
-            <div class="card">
-              <img src="img/projects/1.jpg" class="card-img-top" alt="pr 01">
-              <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <?php foreach ($dataProjets as $datas) { ;?>
+              <div class="col-md-4 mb-4">
+                  <div class="card">
+                      <img src="img/<?php echo $datas['image']?>" class="card-img-top" alt="SC4a">
+                      <div class="card-body">
+                          <p class="card-text"><?php echo $datas['description']?></p>
+                      </div>
+                  </div>
               </div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <div class="card">
-              <img src="img/projects/2.jpg" class="card-img-top" alt="pr 02">
-              <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <div class="card">
-              <img src="img/projects/3.jpg" class="card-img-top" alt="pr 03">
-              <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <div class="card">
-              <img src="img/projects/4.jpg" class="card-img-top" alt="pr 03">
-              <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </div>
-          </div><div class="col-md-4 mb-3">
-            <div class="card">
-              <img src="img/projects/6.jpg" class="card-img-top" alt="pr 03">
-              <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </div>
-          </div>
+          <?php } ?>
         </div>
       </div>
     </section>
@@ -135,21 +125,21 @@
                 <i class="bi bi-geo-alt-fill"></i>
                 <div>
                   <h4>Lokasi:</h4>
-                  <p>Jl. Gatot Koco Gg. VIII/14A Kolpajung Pamekasan, Madura Jawa Timur</p>
+                  <p><?php echo $dataCompanies['address']?></p>
                 </div>
               </div>
               <div class="info-item d-flex">
                 <i class="bi bi-instagram"></i>
                 <div>
                   <h4>Instagram:</h4>
-                  <p>@faraethereal</p>
+                  <p><?php echo $dataCompanies['sosial']?></p>
                 </div>
               </div>
               <div class="info-item d-flex">
                 <i class="bi bi-phone"></i>
                 <div>
                   <h4>Phone</h4>
-                  <p>+62 8133 4814 156</p>
+                  <p><?php echo $dataCompanies['phone']?></p>
                 </div>
               </div>
             </div>

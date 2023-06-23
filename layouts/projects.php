@@ -17,12 +17,10 @@
         header("Location:projects.php");
     }
 
-    
-
     if(isset($_POST["simpan"])) {
         $name       = $_POST["name"];
         $description= $_POST["description"];
-        $id = $_POST["id"];
+        //$id = $_POST["id"];
         //var_dump($_POST['image' ]);
         //$id      = $_SESSION['id'];
 
@@ -34,74 +32,73 @@
         $image = basename($_FILES["image"]["name"]);
         
         $uploadHasil = 0;
-        if ($_POST["id"]== 0) {
-            $queryInsert ="INSERT INTO projects (name, description,image) values ('$name', '$description','$image')";
-            $result = mysqli_query($koneksi,$queryInsert);
+        
+        $queryInsert ="INSERT INTO projects (name, description,image) values ('$name', '$description','$image')";
+        $result = mysqli_query($koneksi,$queryInsert);
+
+        if(empty($_FILES["image"]["name"])) {
+            // $queryUpdate = "UPDATE companies SET name ='$name', description='$description' WHERE id ";
+            // $result = mysqli_query($koneksi,$queryUpdate);
+            $uploadOk = 6;
+            $hasil = "Pofile photo cant be empty";
         }else {
-            if(empty($_FILES["image"]["name"])) {
-                // $queryUpdate = "UPDATE companies SET name ='$name', description='$description' WHERE id ";
-                // $result = mysqli_query($koneksi,$queryUpdate);
-                $uploadOk = 6;
-                $hasil = "Pofile photo cant be empty";
-            }else {
-                $check = getimagesize($_FILES["image"]["tmp_name"]);
-                // var_dump($check);
-                if($check !== false) {
-                    $uploadOk = 1;
-                } else {
-                    $uploadOk = 0;
-                    $uploadHasil = 2;
+            $check = getimagesize($_FILES["image"]["tmp_name"]);
+            // var_dump($check);
+            if($check !== false) {
+                $uploadOk = 1;
+            } else {
+                $uploadOk = 0;
+                $uploadHasil = 2;
+            }
+        
+            // Check if file already exists
+            if (file_exists($target_file)) {
+                $uploadOk = 0;
+                $uploadHasil = 3;
+            }
+
+            // Check file size
+            if ($_FILES["image"]["size"] > 500000) {
+                $uploadOk = 0;
+                $uploadHasil = 4;
                 }
+
+            // Allow certain file formats
+            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+                $uploadHasil = 5;
+                $uploadOk = 0;
+            }
+
+            // Check if $uploadOk is set to 0 by an error
+            if ($uploadOk == 0) {
+                if($uploadHasil == 2){
+                    $hasil = "File is not an image";
+                } else if($uploadHasil ==3){
+                    $hasil = "Sorry, file is already exists";    
+                } else if($uploadHasil == 4){
+                    $hasil = "Sorrr, your file is too large";    
+                } else if($uploadHasil == 5){
+                    $hasil = "Sorry, only jpg, jpeg, png and gif files are supported";
+                }
+            // if everything is ok, try to upload file
             
-                // Check if file already exists
-                if (file_exists($target_file)) {
-                    $uploadOk = 0;
-                    $uploadHasil = 3;
-                }
-    
-                // Check file size
-                if ($_FILES["image"]["size"] > 500000) {
-                    $uploadOk = 0;
-                    $uploadHasil = 4;
-                    }
-    
-                // Allow certain file formats
-                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
-                    $uploadHasil = 5;
-                    $uploadOk = 0;
-                }
-    
-                // Check if $uploadOk is set to 0 by an error
-                if ($uploadOk == 0) {
-                    if($uploadHasil == 2){
-                        $hasil = "File is not an image";
-                    } else if($uploadHasil ==3){
-                        $hasil = "Sorry, file is already exists";    
-                    } else if($uploadHasil == 4){
-                        $hasil = "Sorrr, your file is too large";    
-                    } else if($uploadHasil == 5){
-                        $hasil = "Sorry, only jpg, jpeg, png and gif files are supported";
-                    }
-                // if everything is ok, try to upload file
+            } else {
+                // $link =  str_replace('\layouts','',__dir__);
+                // unlink($link."/img/".$data["image"]);
+                // var_dump($target_file);
+                // $image = basename($_FILES["image"]["name"]);
+                // $queryInsert ="INSERT INTO projects (name, description,image) values ('$name', '$description','$image')";
+                // $result = mysqli_query($koneksi,$queryInsert);
+                
+                if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                    // var_dump( "Upload ");
+                    $hasil = "The file ". htmlspecialchars( basename( $_FILES["image"]["name"])). " has been uploaded.";
                 } else {
-                    // $link =  str_replace('\layouts','',__dir__);
-                    // unlink($link."/img/".$data["image"]);
-                    $image = basename($_FILES["image"]["name"]);
-                    if ($_POST["id"]== 0) {
-                        $queryInsert ="INSERT INTO projects (name, description,image, id) values ('$name', '$description','$image','$id')";
-                        $result = mysqli_query($koneksi,$queryInsert);
-                    }
-                    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-                        // var_dump( "Upload ");
-                        $hasil = "The file ". htmlspecialchars( basename( $_FILES["image"]["name"])). " has been uploaded.";
-                    } else {
-                        echo "Sorry, there was an error uploading your file.";
-                    }
+                    echo "Sorry, there was an error uploading your file.";
                 }
             }
         }
-        
-        
+          
     }
 
 ?>
@@ -227,17 +224,17 @@
                                     <tbody>
                                     <?php
                                         $no=1;
-                                        foreach($resultProjets as $data){
+                                        foreach($resultProjets as $datas){
                                             echo "<tr>";
                                                 echo "<td>{$no}</td>";
-                                                echo "<td>{$data['name']}</td>";
-                                                echo "<td>{$data['description']}</td>";?>
-                                                <td><img src ="../img/<?php echo $data['image']?>" width = 100></td>
+                                                echo "<td>{$datas['name']}</td>";
+                                                echo "<td>{$datas['description']}</td>";?>
+                                                <td><img src ="http://localhost/portofolio/img/<?php echo $datas['image']?>" width = 100></td>
                                                 <?php echo "<td>";?>
-                                                    <a class="btn btn-info" href="projectsUpdate.php/<?php echo $data['id']?>">Edit</a>
+                                                    <a class="btn btn-info" href="http://localhost/portofolio/layouts/projectsUpdate.php/<?php echo $datas['id'];?>">Edit</a>
                                                     
                                                     <form onsubmit="return confirm('Apakah yaknik mau dihapus?')" method="post" action="http://localhost/portofolio/layouts/projects.php">
-                                                        <input type="hidden" name="id" value="<?php echo $data['id'];?>">
+                                                        <input type="hidden" name="id" value="<?php echo $datas['id'];?>">
                                                         <input type="submit" name="hapus" value= "Hapus" class="btn btn-danger">
                                                     </form>
                                                     </td>

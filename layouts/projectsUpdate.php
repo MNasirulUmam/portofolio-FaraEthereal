@@ -9,13 +9,13 @@
     $uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     $uri_segments = explode('/', $uri_path);
 
-    $id = $uri_segments[3];
+    $id = $uri_segments[4];
 
-    $queryprojects ="SELECT * FROM projects";
+    $queryprojects ="SELECT * FROM projects WHERE id = '$id'";
     $result = mysqli_query($koneksi,$queryprojects);
-    $data = mysqli_fetch_array($result, MYSQLI_ASSOC);
-    var_dump($data);
-    die;   
+    $data = mysqli_fetch_array($result);
+    
+      
     if(isset($_POST["simpan"])) {
         $name    = $_POST["name"];
         $description = $_POST["description"];
@@ -29,8 +29,9 @@
 
         $uploadHasil = 0;
         if(empty($_FILES["image"]["name"])) {
-            $queryUpdate = "UPDATE projects SET name ='$name', description ='$description' WHERE id ";
+            $queryUpdate = "UPDATE projects SET name ='$name', description ='$description' WHERE id = '$id'";
             $result = mysqli_query($koneksi,$queryUpdate);
+            // header("Location:projects.php");
             $uploadOk = 6;
             $hasil = "Pofile photo cant be empty";
         }else {
@@ -77,7 +78,7 @@
                 $link =  str_replace('\layouts','',__dir__);
                 unlink($link."/img/".$data["image"]);
                 $image = basename($_FILES["image"]["name"]);
-                $queryUpdate = "UPDATE projects SET name ='$name', description ='$description', image ='$image' WHERE id ";
+                $queryUpdate = "UPDATE projects SET name ='$name', description ='$description', image ='$image' WHERE id = '$id'";
                 $result = mysqli_query($koneksi,$queryUpdate);
                 if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
                     // var_dump( "Upload ");
@@ -101,16 +102,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Companies</title>
+    <title>Projects</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="http://localhost/portofolio/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="http://localhost/portofolio/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -129,16 +130,6 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                 
-                    <!-- Page Heading -->
-                    <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Create Companies</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                    </div> -->
-
-                    <!-- Content Row -->
-                    <!-- <div class="row">
-
-                    </div> -->
                     <!-- Froms Input -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -152,7 +143,7 @@
                                     <div class="alert alert-danger" role="danger"> <?php echo $hasil;?></div>
                                 <?php } ?> 
                             <?php } ?>   
-                            <form action="http://localhost/portofolio/layouts/projects.php" method="post" enctype="multipart/form-data">
+                            <form action="http://localhost/portofolio/layouts/projectsUpdate.php/<?php echo $data['id'];?>" method="post" enctype="multipart/form-data">
                                 <div class="mb-3">
                                     <label class="form-label">Name</label>
                                     <input type="text" class="form-control" name="name" id="" value="<?php echo $data['name']?>">
@@ -165,13 +156,14 @@
                                     <label for="formFile" class="form-label">image</label>
                                     <input accept="image/*" name="image" class="form-control" type='file' id="image" />
                                     <br>
-                                    <img id="blah" src="../img/<?php echo $data['image']?>" name="image" width='100' alt="your image" />
+                                    <img id="blah" src="http://localhost/portofolio/img/<?php echo $data['image']?>" name="image" width='100' alt="your image" />
                                 </div>
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" class="form-check-input" id="">
                                     <label class="form-check-label">Check me out</label>
                                 </div>
-                                <input type="submit" name="simpan" class="btn btn-primary"></input>
+                                <input type="hidden" name="id" value="<?php echo $data['id'];?>" class="btn btn-primary">
+                                <input type="submit" name="simpan" class="btn btn-primary">
                                 <a href="<?php $_SERVER['PHP_SELF']; ?>" class="btn btn-secondary">Refresh</a>
                             </form>
                         </div>
@@ -202,21 +194,21 @@
     <?php include '../modallogout.php';?>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="http://localhost/portofolio/vendor/jquery/jquery.min.js"></script>
+    <script src="http://localhost/portofolio/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="http://localhost/portofolio/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin-2.min.js"></script>
+    <script src="http://localhost/portofolio/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="../vendor/chart.js/Chart.min.js"></script>
+    <script src="http://localhost/portofolio/vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../js/demo/chart-area-demo.js"></script>
-    <script src="../js/demo/chart-pie-demo.js"></script>
+    <script src="http://localhost/portofolio/js/demo/chart-area-demo.js"></script>
+    <script src="http://localhost/portofolio/js/demo/chart-pie-demo.js"></script>
     <script>
         logo.onchange = evt => {
         const [file] = logo.files
