@@ -1,24 +1,23 @@
-<?php 
+<?php
+    ## Author : M. Nasirul Umam
+    ## Tanggal : 25 juli 2023
     session_start();
-    if ($_SESSION['username'] == false){
+    if ($_SESSION['username'] == false){ // pengecekan apabila username sama dengan salah maka kembali ke login
         header('Location:../login.php');
     }
-    require_once 'init.php';
+    require_once 'init.php'; // mengambil halaman include dari koneksi
 
-    $queryCompanies ="SELECT * FROM companies";
-    $resultCompanies = mysqli_query($koneksi,$queryCompanies);
-    $dataCompanies = mysqli_fetch_array($resultCompanies);
-    
-    $queryAbouts ="SELECT * FROM abouts";
-    $resultAbouts = mysqli_query($koneksi,$queryAbouts);
-    $dataAbouts = mysqli_fetch_array($resultAbouts);
+    $queryUsers ="SELECT * FROM users"; // Query untuk memilih semua kolom dari tabel 'users'
+    $resultUsers = mysqli_query($koneksi,$queryUsers); // Menjalankan query menggunakan fungsi mysqli_query dengan menggunakan koneksi '$koneksi'.
+    $dataUsers = mysqli_num_rows($resultUsers);
 
-    $queryProjets ="SELECT * FROM projects";
-    $dataProjets = mysqli_query($koneksi,$queryProjets);
+    $queryProjets ="SELECT * FROM projects"; // Query untuk memilih semua kolom dari tabel 'projects'
+    $resultProjets = mysqli_query($koneksi,$queryProjets); // Menjalankan query menggunakan fungsi mysqli_query dengan menggunakan koneksi '$koneksi'.
+    $dataProjets = mysqli_num_rows($resultProjets);
 
-    $queryContacts ="SELECT *,contacts.id as id_contacts FROM contacts join companies on contacts.company_id = companies.id order by contacts.id asc";
-    $resultContacts = mysqli_query($koneksi,$queryContacts);
-    $dataContacts = mysqli_fetch_array($resultContacts);
+    $queryContacts ="SELECT *,contacts.id as id_contacts FROM contacts join companies on contacts.company_id = companies.id order by contacts.id asc"; // Query untuk memilih semua kolom dari tabel 'contacst' dan 'companies' dengan malakukan joint
+    $resultContacts = mysqli_query($koneksi,$queryContacts); // Menjalankan query menggunakan fungsi mysqli_query dengan menggunakan koneksi '$koneksi'.
+    $dataContacts = mysqli_num_rows($resultContacts);
     
 ?>
 <!DOCTYPE html>
@@ -75,11 +74,11 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Earnings (Monthly)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                                Total Uses</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $dataUsers?></div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            <i class="fas fa-users fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -93,8 +92,8 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Earnings (Annual)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                                Total Projects</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $dataProjets?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -111,8 +110,8 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Pending Requests</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                                Total Kontak</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $dataContacts?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>

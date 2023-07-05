@@ -1,20 +1,22 @@
-<?php 
+<?php
+## Author : M. Nasirul Umam
+## Tanggal : 25 juni 2023
     session_start();
-    if ($_SESSION['username'] == false){
+    if ($_SESSION['username'] == false){ // pengecekan apabila username sana dengan salah maka kembali ke menu login
         header('Location:../login.php');
     }
-    require_once 'init.php';
+    require_once 'init.php'; // mengambil halaman include dari koneski
     //$name = $_SESSION['name'];
     
-    $queryProjets ="SELECT * FROM projects";
-    $resultProjets = mysqli_query($koneksi,$queryProjets);
+    $queryProjets ="SELECT * FROM projects"; // deklaras variable untuk tabel projets
+    $resultProjets = mysqli_query($koneksi,$queryProjets); // perintah sql untuk mengecek sql konek ke database dengan query projets
     //$data = mysqli_fetch_array($resultAbouts);
 
-    if (isset($_POST["hapus"])) {
-        $id = $_POST["id"];
-        $queryhapus = "DELETE FROM projects WHERE id = '$id'";
+    if (isset($_POST["hapus"])) { // pengecekan  apakah sebuah variabel post[hapus] telah tersedia (sudah didefenisikan) atau belum.
+        $id = $_POST["id"]; // deklrasi variable id
+        $queryhapus = "DELETE FROM projects WHERE id = '$id'"; // query untuk menghapus data berdasrakan id
         mysqli_query($koneksi,$queryhapus);
-        header("Location:projects.php");
+        header("Location:projects.php"); // pindah lokasi ke halaman projets.php
     }
 
     if(isset($_POST["simpan"])) {
@@ -30,12 +32,18 @@
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         $image = basename($_FILES["image"]["name"]);
-        
+        // upload ok = apakah masing - masing if di jalankan atau didak ?
+        // uploadHasil = mengarahkan error ke perintah yang mana
+        // uploadOk = 1 berhasil
+        // uploadHasil = 2 file bukan gambar
+        // uploadHasil = 3 file sudah ada 
+        // uploadHasil = 4 file terlalu besar
+        // uploadHasil = 5 file harus jpg, jpeg, png, dan gif
         $uploadHasil = 0;
         
         $queryInsert ="INSERT INTO projects (name, description,image) values ('$name', '$description','$image')";
         $result = mysqli_query($koneksi,$queryInsert);
-
+        // pengecekan apakah file tipe gambar kosong atau tidak 
         if(empty($_FILES["image"]["name"])) {
             // $queryUpdate = "UPDATE companies SET name ='$name', description='$description' WHERE id ";
             // $result = mysqli_query($koneksi,$queryUpdate);
@@ -176,7 +184,7 @@
                                                 <label for="formFile" class="form-label">Image</label>
                                                 <input accept="image/*" name="image" class="form-control" type='file' id="image"/>
                                                 <br>
-                                                <img id="blah" src="../img/<?php echo $data['image']?>" name="image" width='100' alt="your image"/>
+                                                <img id="blah" src="http://localhost/portofolio/img/<?php echo $data['image']?>" name="image" width='100' alt="your image"/>
                                                 <input type="hidden" class="form-control" name="id" value ="0">
                                             </div>
                                         </div>
@@ -288,8 +296,8 @@
     <!-- Page level custom scripts -->
     <script src="../js/demo/datatables-demo.js"></script>
     <script>
-        logo.onchange = evt => {
-        const [file] = logo.files
+        image.onchange = evt => {
+        const [file] = image.files
         if (file) {
             blah.src = URL.createObjectURL(file)
         }

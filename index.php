@@ -1,4 +1,6 @@
-<?php 
+<?php
+## Author : M. Nasirul Umam
+## Tanggal : 25 juli 2023 
     include "Koneksi.php";
 
     $queryCompanies ="SELECT * FROM companies";

@@ -1,7 +1,9 @@
 <?php
+## Author : M. Nasirul Umam
+## Tanggal : 25 juli 2023
 session_start();
- $username = "admin"; // variable menampung data username dummu
- $password = "123456"; // variable menampung data password dummu
+//  $username = "admin"; // variable menampung data username dummu
+//  $password = "123456"; // variable menampung data password dummu
  if(isset($_POST['login'])){
     if(empty($_POST['username']) && empty($_POST['password'])){
         $error_userpass = "Username dan password harus di isi !!!";

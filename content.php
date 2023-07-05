@@ -1,13 +1,15 @@
-<?php 
+<?php
+## Author : M. Nasirul Umam
+## Tanggal : 25 juli 2023 
     include "Koneksi.php";    
 
-    $queryCompanies ="SELECT * FROM companies";
-    $resultCompanies = mysqli_query($koneksi,$queryCompanies);
-    $dataCompanies = mysqli_fetch_array($resultCompanies);
+    $queryCompanies ="SELECT * FROM companies"; //$query menampilakan tabel comanies
+    $resultCompanies = mysqli_query($koneksi,$queryCompanies); // Menjalankan query menggunakan fungsi mysqli_query dengan menggunakan koneksi '$koneksi'.
+    $dataCompanies = mysqli_fetch_array($resultCompanies); // mengambil qery data yang pertama
 
-    $queryUser ="SELECT * FROM users";
-    $resultUser = mysqli_query($koneksi,$queryUser);
-    $dataUser = mysqli_fetch_array($resultUser);
+    $queryUser ="SELECT * FROM users"; // query menampilakan tabel men uses
+    $resultUser = mysqli_query($koneksi,$queryUser); // Menjalankan query menggunakan fungsi mysqli_query dengan menggunakan koneksi '$koneksi'.
+    $dataUser = mysqli_fetch_array($resultUser); // mengambil qery data yang pertama
 ?>
 
 <!-- Topbar -->

@@ -1,14 +1,16 @@
-<?php 
+<?php
+## Author : M. Nasirul Umam
+## Tanggal : 25 juli 2023 
     session_start();
-    if ($_SESSION['username'] == false){
+    if ($_SESSION['username'] == false){ // pengecekan apabila username sana dengan salah maka kembali ke menu login
         header('Location:../login.php');
     }
-    require_once 'init.php';
+    require_once 'init.php'; // // mengambil halaman include dari koneksi
 
     //$name = $_SESSION['name'];
     
-    $queryAbouts ="SELECT * FROM abouts";
-    $resultAbouts = mysqli_query($koneksi,$queryAbouts);
+    $queryAbouts ="SELECT * FROM abouts"; // query mengambil database abouts
+    $resultAbouts = mysqli_query($koneksi,$queryAbouts); // Menjalankan query menggunakan fungsi mysqli_query dengan menggunakan koneksi '$koneksi'.
     $data = mysqli_fetch_array($resultAbouts);
     // var_dump($data);
     // die;   

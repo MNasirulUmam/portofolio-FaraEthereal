@@ -1,41 +1,48 @@
-<?php 
+<?php
+## Author : M. Nasirul Umam
+## Tanggal : 25 juli 2023 
     session_start();
-    if ($_SESSION['username'] == false){
+    if ($_SESSION['username'] == false){ // pengecekan apabila username sama dengan salah maka kembali ke login
         header('Location:../login.php');
     }
-    require_once 'init.php';
+    require_once 'init.php'; // mengambil halaman include dari koneksi
 
     //$name = $_SESSION['name'];
-    $uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    $uri_segments = explode('/', $uri_path);
+    $uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // untuk Mengambil jalur dari URL yang diminta oleh pengguna menggunakan fungsi parse_url.
+    $uri_segments = explode('/', $uri_path); // Memecah jalur URL menjadi segmen-segmen terpisah berdasarkan karakter "/" menggunakan fungsi explode.
 
-    $id = $uri_segments[4];
+    $id = $uri_segments[4]; //Mengambil nilai yang ada pada segmen keempat (indeks 4) dari array segmen-segmen untuk digunakan sebagai nilai variabel $id
 
-    $queryprojects ="SELECT * FROM projects WHERE id = '$id'";
-    $result = mysqli_query($koneksi,$queryprojects);
-    $data = mysqli_fetch_array($result);
+    $queryprojects ="SELECT * FROM projects WHERE id = '$id'"; // Query untuk memilih semua kolom dari tabel 'projects' dengan kondisi 'id' yang sama dengan nilai variabel '$id'
+    $result = mysqli_query($koneksi,$queryprojects); // Menjalankan query menggunakan fungsi mysqli_query dengan menggunakan koneksi '$koneksi'.
+    $data = mysqli_fetch_array($result); // Mengambil hasil query sebagai array menggunakan fungsi mysqli_fetch_array.
     
-      
-    if(isset($_POST["simpan"])) {
-        $name    = $_POST["name"];
-        $description = $_POST["description"];
+    if(isset($_POST["simpan"])) { // pengecekan apakah klik  "simpan" telah ditekan pada formulir sebelum melanjutkan.
+        $name    = $_POST["name"]; // deklarasi variabel name dari kiriman from 
+        $description = $_POST["description"]; // // deklarasi variabel name dari kiriman from 
         //$id      = $_SESSION['id'];
 
-        $target_dir = "../img/";
-        $target_file = $target_dir . basename($_FILES["image"]["name"]);
-        // var_dump($target_file);
+        $target_dir = "../img/"; //  Menentukan direktori target untuk menyimpan file gambar.
+        $target_file = $target_dir . basename($_FILES["image"]["name"]); // Membentuk jalur lengkap ke file target dengan menggabungkan direktori target dan nama file gambar yang diunggah
+        // upload ok = apakah masing - masing if di jalankan atau didak ?
+        // uploadHasil = mengarahkan error ke perintah yang mana
+        // uploadOk = 1 berhasil
+        // uploadHasil = 2 file bukan gambar
+        // uploadHasil = 3 file sudah ada 
+        // uploadHasil = 4 file terlalu besar
+        // uploadHasil = 5 file harus jpg, jpeg, png, dan gif
         $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION)); //  Mendapatkan ekstensi file dari jalur file target dan mengubahnya menjadi huruf kecil.
 
         $uploadHasil = 0;
+        // pengecekan apakah file tipe gambar kosong atau tidak 
         if(empty($_FILES["image"]["name"])) {
-            $queryUpdate = "UPDATE projects SET name ='$name', description ='$description' WHERE id = '$id'";
-            $result = mysqli_query($koneksi,$queryUpdate);
-            // header("Location:projects.php");
+            $queryUpdate = "UPDATE projects SET name ='$name', description ='$description' WHERE id = '$id'"; // // Query untuk melakukan pembaruan data pada tabel 'projects' dengan mengatur nilai kolom 'name' dan 'description' berdasarkan kondisi 'id'.
+            $result = mysqli_query($koneksi,$queryUpdate); // Menjalankan query menggunakan fungsi mysqli_query dengan menggunakan koneksi '$koneksi'.
             $uploadOk = 6;
             $hasil = "Pofile photo cant be empty";
         }else {
-            $check = getimagesize($_FILES["image"]["tmp_name"]);
+            $check = getimagesize($_FILES["image"]["tmp_name"]); // Memeriksa apakah file yang diunggah adalah gambar valid
             // var_dump($check);
             if($check !== false) {
                 $uploadOk = 1;
@@ -75,12 +82,12 @@
                 }
             // if everything is ok, try to upload file
             } else {
-                $link =  str_replace('\layouts','',__dir__);
-                unlink($link."/img/".$data["image"]);
-                $image = basename($_FILES["image"]["name"]);
-                $queryUpdate = "UPDATE projects SET name ='$name', description ='$description', image ='$image' WHERE id = '$id'";
-                $result = mysqli_query($koneksi,$queryUpdate);
-                if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                $link =  str_replace('\layouts','',__dir__); // Mengganti bagian '/layouts' dari direktori saat ini dengan string kosong untuk mendapatkan jalur menuju direktori yang diinginkan.
+                unlink($link."/img/".$data["image"]); // Menghapus file gambar lama yang terkait dengan proyek sebelumnya
+                $image = basename($_FILES["image"]["name"]); // Mendapatkan nama file gambar yang diunggah saat ini.
+                $queryUpdate = "UPDATE projects SET name ='$name', description ='$description', image ='$image' WHERE id = '$id'"; // Query untuk memperbarui data pada tabel 'projects' dengan mengatur nilai kolom 'name', 'description', dan 'image' berdasarkan kondisi 'id'.
+                $result = mysqli_query($koneksi,$queryUpdate); // Menjalankan query menggunakan fungsi mysqli_query dengan menggunakan koneksi '$koneksi'.
+                if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) { //Mengunggah file gambar yang diunggah ke direktori target.
                     // var_dump( "Upload ");
                     $hasil = "The file ". htmlspecialchars( basename( $_FILES["image"]["name"])). " has been uploaded.";
                 } else {

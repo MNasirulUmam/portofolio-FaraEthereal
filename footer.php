@@ -1,3 +1,7 @@
+<?php
+## Author : M. Nasirul Umam
+## Tanggal : 25 juli 2023
+?>
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">

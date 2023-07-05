@@ -1,4 +1,7 @@
 <?php
+## Author : M. Nasirul Umam
+## Tanggal : 25 juli 2023
+    // medeklarasi  xmpp database
     $host = 'localhost';
     $user = 'root';
     $password = '';
